@@ -22,3 +22,8 @@ CMakeUserPresets.json
 /.vscode
 ## QtCreator
 /CMakeLists.txt.user*
+
+# macOS
+.DS_Store
+
+
