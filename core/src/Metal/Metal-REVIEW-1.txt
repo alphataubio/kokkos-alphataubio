@@ -1,0 +1,112 @@
+
+*** START CODE REVIEW 1 ***
+
+(1) START BY REREADING ONLINE DOCUMENTATION FOR METAL, ALL IT AGAIN EVERY PAGE IN DETAILS. TAKE THE TIME TO READ EVERY SINGLE WORD OF EVERY SINGLE PAGE BUT SKIP ANYTHING RELATED TO GUI SINCE KOKKOS-METAL IS A GPU COMPUTATIONAL PROJECT WITH NO GUI RENDERING
+
+https://developer.apple.com/documentation/metal
+
+LEARN BASICS FIRST
+
+https://developer.apple.com/documentation/metal/performing-calculations-on-a-gpu
+
+DONT CONFUSE MetalKit’s MTKView WHICH REPRESENTS SCREEN OUTPUT FOR VIDEO GAMES VS KOKKOS VIEW WHICH IS A FAMILY OF TEMPLATED MULTIDIMENSIONAL DATA STRUCTURES ABSTRACTING MULTIDIMENSIONAL C ARRAYS ON HOST (CPU) AND DEVICE (GPU)
+
+https://kokkos.org/kokkos-core-wiki/ProgrammingGuide/View.html
+
+A METAL TEXTURE IS SIMILAR TO L1TEX IN CUDA
+
+https://developer.apple.com/documentation/metal/processing-a-texture-in-a-compute-function
+
+
+LEARN ABSTRACT "KOKKOS MACHINE MODEL" AND MAP THESE IDEAS TO APPLE/MACOS/METAL ARCHITECTURE
+
+https://kokkos.org/kokkos-core-wiki/ProgrammingGuide/Machine-Model.html
+
+LEARN KOKKOS PROGRAMMING MODEL
+
+https://kokkos.org/kokkos-core-wiki/ProgrammingGuide/ProgrammingModel.html
+
+https://developer.apple.com/documentation/metal/synchronizing-cpu-and-gpu-work
+
+MAKE SURE THAT YOU INITIALIZE METAL PROPERLY AND METAL KERNELS ARE LAUNCHED PROPERLY
+
+https://kokkos.org/kokkos-core-wiki/ProgrammingGuide/Initialization.html
+https://kokkos.org/kokkos-core-wiki/API/core/Initialize-and-Finalize.html
+https://developer.apple.com/documentation/metal/gpu-devices-and-work-submission
+https://developer.apple.com/documentation/metal/setting-up-a-command-structure
+https://developer.apple.com/documentation/metal/mtlcommandqueue
+
+
+IF YOU KNOW OPENGL THIS MIGHT HELP YOU UNDERSTAND METAL BETTER
+
+https://developer.apple.com/documentation/metal/migrating-opengl-code-to-metal
+
+REAL ALL THE KOKKOSTUTORIALS
+
+https://github.com/kokkos/kokkos-tutorials
+
+LEARN ABOUT CPP CONCEPTS AND TRAITS IN KOKKOS
+
+https://kokkos.org/kokkos-core-wiki/API/core/KokkosConcepts.html
+https://kokkos.org/kokkos-core-wiki/API/core/Traits.html
+
+
+
+(2) COPYRIGHT COMMENT AT TOP ARE GONE IN ALL FILES. EVERY OPEN SOURCE PROJECT HAS A STANDARD CP/LICENSE COMMENT AT TOP OF EACH FILE THAT MUST BE UNTOUCHED.
+
+//@HEADER
+// ************************************************************************
+//
+//                        Kokkos v. 4.0
+//       Copyright (2022) National Technology & Engineering
+//               Solutions of Sandia, LLC (NTESS).
+//
+// Under the terms of Contract DE-NA0003525 with NTESS,
+// the U.S. Government retains certain rights in this software.
+//
+// Part of Kokkos, under the Apache License v2.0 with LLVM Exceptions.
+// See https://kokkos.org/LICENSE for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+//@HEADER
+
+(3) ADD ABOVE #include <metal_stdlib>
+
+#import <Foundation/Foundation.h>
+#import <Metal/Metal.h>
+
+(4) MISSING IN ALL FILES
+
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+#include <Kokkos_Macros.hpp>
+#if defined(KOKKOS_ENABLE_METAL)
+
+...
+
+#endif /* #if defined( KOKKOS_ENABLE_METAL ) */
+
+(5) MAYBE DONT NEED Kokkos_Metal_BlockSize_Deduction.hpp TBD
+
+(6) SKIP HALF TYPES FROM CUDA AND PIXEL METAL TYPES, I ONLY NEED BOOLEANS, INTEGERS, AND FLOATING POINT FP32 & FP64
+
+Kokkos_Metal_Half_Conversion.hpp
+Kokkos_Metal_Half_Impl_Type.hpp
+
+
+(7) SKIP *GRAPH*
+
+
+(8) HANDLE METAL ERRORS IN Kokkos_Metal_Error.hpp
+
+https://developer.apple.com/documentation/metal/mtlcommandbuffererror-swift.struct
+
+(9) BEFORE WRITING Kokkos_Metal.*, LEARN:
+
+https://developer.apple.com/documentation/metal/memory-heaps
+
+(10) BEFORE WRITING Kokkos_Metal_Task.hpp, LEARN
+
+https://developer.apple.com/documentation/metal/resource-synchronization
+
+*** END CODE REVIEW 1 ***
